@@ -1,40 +1,66 @@
 #include "Scanner.h"
 #include <fstream>
 
+#define DEBUG
+#ifdef DEBUG
+#include <iostream>
+#endif
+
 using namespace Prison;
 
-Scanner::Scanner(const char *filename)
-{
+Scanner::Scanner(const char *filename) {
 	m_stream.open(filename, std::ifstream::in);
-	m_next = m_stream.get();
-	m_eof = false;
+
+	m_current_line = m_next_line = 1;
+	m_current_column = m_next_column = 1;
+
+	m_next = ' ';
+	shift();
 }
 
-Scanner::~Scanner()
-{
+Scanner::~Scanner() {
 	m_stream.close();
 }
 
-char Scanner::shift()
-{
+char Scanner::shift() {
 	char current = m_next;
+	m_current_line = m_next_line;
+	m_current_column = m_next_column;
 
-	while (m_stream.good() && isspace(m_next = m_stream.get())) {}
+	while (!eof()) {
+		m_stream.get(m_next);
 
-	if (!m_stream.good()) {
-		m_eof = true;
+		m_next_column++;
+
+		if (m_next == '\n') {
+			m_next_line++;
+			m_next_column = 1;
+		}
+
+		if (!isspace(m_next)) {
+			break;
+		}
+	}
+
+	if (eof()) {
 		m_stream.close();
 	}
 
 	return current;
 }
 
-char Scanner::lookahead()
-{
+char Scanner::lookahead() {
 	return m_next;
 }
 
-bool Scanner::eof()
-{
-	return m_eof;
+bool Scanner::eof() {
+	return m_stream.eof();
+}
+
+unsigned int Scanner::getLine() {
+	return m_current_line;
+}
+
+unsigned int Scanner::getColumn() {
+	return m_current_column;
 }

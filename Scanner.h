@@ -5,8 +5,7 @@
 
 namespace Prison
 {
-	class Scanner
-	{
+	class Scanner {
 
 		public:
 			Scanner(const char *filename);
@@ -15,10 +14,16 @@ namespace Prison
 			char shift();
 			char lookahead();
 			bool eof();
+
+			unsigned int getLine();
+			unsigned int getColumn();
 		private:
 			std::ifstream m_stream;
 			char m_next;
-			bool m_eof;
+			unsigned int m_current_line;
+			unsigned int m_current_column;
+			unsigned int m_next_line;
+			unsigned int m_next_column;
 	};
 };
 

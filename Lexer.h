@@ -3,23 +3,25 @@
 
 #include "Scanner.h"
 #include <map>
+#include <iostream>
 
 namespace Prison
 {
 	struct Token {
-		char * name;
-		char * value;
+		const char * name;
+		const char * value;
+		unsigned int line;
+		unsigned int column;
 	};
 
-	class Lexer
-	{
+	class Lexer {
 		public:
 			Lexer(Scanner * scanner);
 
 			Scanner * getScanner();
 
-			char * shift();
-			char * lookahead();
+			Token shift();
+			Token lookahead();
 			bool eof();
 		private:
 			Scanner * m_scanner;
@@ -27,6 +29,7 @@ namespace Prison
 			std::map<const char *, const char *> m_tokenRegexes;
 
 			bool regexBroken(const char * s, char lookahead);
+			Token createToken(const char * s);
 	};
 };
 
