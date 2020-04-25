@@ -10,12 +10,17 @@ Scanner::Scanner(const char *filename)
 	m_eof = false;
 }
 
+Scanner::~Scanner()
+{
+	m_stream.close();
+}
+
 char Scanner::shift()
 {
 	char current = m_next;
 
 	if (m_stream.good()) {
-		m_next = m_stream.get();
+		while (isspace(m_next = m_stream.get())){}
 	} else {
 		m_eof = true;
 		m_stream.close();

@@ -10,6 +10,7 @@ namespace Prison
 
 		public:
 			Scanner(const char *filename);
+			~Scanner();
 
 			char shift();
 			char lookahead();
