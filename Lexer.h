@@ -20,11 +20,13 @@ namespace Prison
 
 			char * shift();
 			char * lookahead();
-			bool regexBroken(const char * s, char lookahead);
+			bool eof();
 		private:
 			Scanner * m_scanner;
 			char * m_next;
 			std::map<const char *, const char *> m_tokenRegexes;
+
+			bool regexBroken(const char * s, char lookahead);
 	};
 };
 

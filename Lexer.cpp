@@ -16,8 +16,8 @@ Lexer::Lexer(Scanner * scanner)
 	m_tokenRegexes["semicolon"] = "\\;";
 	m_tokenRegexes["equals"] = "=";
 
-
 	m_next = new char[0];
+	shift();
 }
 
 Scanner * Lexer::getScanner()
@@ -53,6 +53,11 @@ char * Lexer::shift()
 char * Lexer::lookahead()
 {
 	return m_next;
+}
+
+bool Lexer::eof()
+{
+	return m_scanner->eof();
 }
 
 bool Lexer::regexBroken(const char * s, char lookahead)
