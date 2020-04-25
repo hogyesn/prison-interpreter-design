@@ -73,7 +73,7 @@ bool Lexer::regexBroken(const char * s, char lookahead) {
 
 	std::map<const char *, const char *>::iterator it;
 
-	for ( it = m_tokenRegexes.begin(); it != m_tokenRegexes.end(); it++ ) {
+	for (it = m_tokenRegexes.begin(); it != m_tokenRegexes.end(); it++) {
 		std::regex regex(it->second);
 
 		if (std::regex_match(token, regex)) {
