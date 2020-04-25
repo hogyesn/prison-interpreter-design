@@ -19,12 +19,11 @@ char Scanner::shift()
 {
 	char current = m_next;
 
-	if (m_stream.good()) {
-		while (isspace(m_next = m_stream.get())){}
-	} else {
+	while (m_stream.good() && isspace(m_next = m_stream.get())) {}
+
+	if (!m_stream.good()) {
 		m_eof = true;
 		m_stream.close();
-		return '\0';
 	}
 
 	return current;
