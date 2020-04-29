@@ -14,7 +14,7 @@ Scanner::Scanner(const char *filename) {
 	m_current_line = m_next_line = 1;
 	m_current_column = m_next_column = 1;
 
-	m_next = ' ';
+	m_next = '\0';
 	shift();
 }
 
@@ -23,16 +23,15 @@ Scanner::~Scanner() {
 }
 
 char Scanner::shift() {
-	char current = m_next;
+	unsigned char current = m_next;
 	m_current_line = m_next_line;
 	m_current_column = m_next_column;
 
-	while (!eof()) {
-		m_stream.get(m_next);
 
+	while (m_stream.good() && (m_next = m_stream.get())) {
 		m_next_column++;
 
-		if (m_next == '\n') {
+		if (m_next == '\n' || m_next == '\r') {
 			m_next_line++;
 			m_next_column = 1;
 		}

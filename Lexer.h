@@ -17,6 +17,7 @@ namespace Prison
 	class Lexer {
 		public:
 			Lexer(Scanner * scanner);
+			~Lexer();
 
 			Scanner * getScanner();
 
@@ -28,7 +29,7 @@ namespace Prison
 			char * m_next;
 			std::map<const char *, const char *> m_tokenRegexes;
 
-			bool regexBroken(const char * s, char lookahead);
+			bool regexBroken(const char * s, const char lookahead);
 			Token createToken(const char * s);
 	};
 };
