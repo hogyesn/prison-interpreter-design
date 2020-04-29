@@ -31,11 +31,18 @@ char Scanner::shift() {
 	while (m_stream.good() && (m_next = m_stream.get())) {
 		m_next_column++;
 
-		if (m_next == '\n' || m_next == '\r') {
+		// windows line ending
+		if (m_next == '\r') {
+			continue;
+		}
+
+		// line ending
+		if (m_next == '\n') {
 			m_next_line++;
 			m_next_column = 1;
 		}
 
+		// expressive character found
 		if (!isspace(m_next)) {
 			break;
 		}
