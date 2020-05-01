@@ -35,7 +35,7 @@ Token Lexer::shift() {
 
 	char * parseStack = new char[255];
 	char nextChar;
-	char c = 0;
+	unsigned char c = 0;
 
 	unsigned int line = m_scanner->getLine();
 	unsigned int column = m_scanner->getColumn();

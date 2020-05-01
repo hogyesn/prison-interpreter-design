@@ -27,7 +27,6 @@ char Scanner::shift() {
 	m_current_line = m_next_line;
 	m_current_column = m_next_column;
 
-
 	while (m_stream.good() && (m_next = m_stream.get())) {
 		m_next_column++;
 
