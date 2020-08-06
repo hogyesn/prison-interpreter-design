@@ -5,9 +5,9 @@
 
 namespace Prison { namespace AST { namespace Operations { namespace Unary {
 
-class UnaryMinus : public virtual IExpression {
+class Minus : public virtual IExpression {
 	public:
-		UnaryMinus(IExpression * l) {
+		Minus(IExpression * l) {
 			m_left = l;
 		};
 
