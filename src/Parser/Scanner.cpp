@@ -1,4 +1,4 @@
-#include "Scanner.h"
+#include "Prison/Parser/Scanner.h"
 #include <fstream>
 
 #define DEBUG
