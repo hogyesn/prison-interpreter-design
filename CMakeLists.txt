@@ -7,6 +7,8 @@ project( prison_interpreter )
 # flags
 add_definitions( "-g" )
 
+set(CMAKE_BUILD_TYPE Debug)
+
 # files
 
 # include
