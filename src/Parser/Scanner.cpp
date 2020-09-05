@@ -6,7 +6,7 @@
 #include <iostream>
 #endif
 
-using namespace Prison;
+using namespace Prison::Parser;
 
 Scanner::Scanner(const char *filename) {
 	m_stream.open(filename, std::ifstream::in);

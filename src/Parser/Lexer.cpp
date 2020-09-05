@@ -4,7 +4,7 @@
 #include <map>
 #include <iostream>
 
-using namespace Prison;
+using namespace Prison::Parser;
 
 Lexer::Lexer(Scanner * scanner) {
 	m_scanner = scanner;
