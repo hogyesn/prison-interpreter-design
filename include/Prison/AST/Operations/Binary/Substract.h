@@ -1,19 +1,20 @@
 #ifndef PRISON_AST_OPERATIONS_BINARY_SUBSTRACT
 #define PRISON_AST_OPERATIONS_BINARY_SUBSTRACT
 
-#include <Prison/AST/IExpression.h>
+#include "Prison/AST/Node.h"
+#include "Prison/AST/Scope.h"
 
 namespace Prison { namespace AST { namespace Operations { namespace Binary {
 
-class Substract : public virtual IExpression {
+class Substract : public virtual Node {
 	public:
-		Substract(IExpression * l, IExpression * r) {
+		Substract(Node * l, Node * r) {
 			m_type = "subop";
 			m_left = l;
 			m_right = r;
 		};
 
-		virtual IExpression & evaluate(Scope * scope) {
+		virtual Node & evaluate(Scope * scope) {
 			return m_left->evaluate(scope) - m_right->evaluate(scope);
 		};
 };

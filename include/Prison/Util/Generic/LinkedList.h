@@ -37,6 +37,12 @@ class LinkedList {
 				return m_value;
 			}
 
+			U setValue(U value) {
+				m_value = value;
+
+				return m_value;
+			}
+
 
 		private:
 			const char * m_key;
@@ -81,12 +87,18 @@ class LinkedList {
 
 		~LinkedList() {
 			Node<T> * current = m_head;
-			Node<T> * next;
+			Node<T> * next = nullptr;
 
 			while (current != nullptr) {
 				next = current->getNext();
 				delete current;
 				current = next;
+
+				m_count--;
+			}
+
+			if (next != nullptr) {
+				delete next;
 			}
 		}
 
@@ -100,18 +112,22 @@ class LinkedList {
 			}
 
 			Node<T> * tmp = m_head;
+			Node<T> * prev = nullptr;
 
-			while (tmp->getNext()) {
+			while (tmp) {
 				if (strcmp(tmp->getKey(), key) == 0) {
 					delete newItem;
 
-					throw new NodeAlreadyExistsException(key);
+					tmp->setValue(value);
+
+					return true;
 				}
 
+				prev = tmp;
 				tmp = tmp->getNext();
 			}
 
-			tmp->setNext(newItem);
+			prev->setNext(newItem);
 
 			m_count++;
 
