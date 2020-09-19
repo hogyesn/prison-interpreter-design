@@ -1,21 +1,27 @@
 #ifndef PRISON_AST_IEXPRESSION
 #define PRISON_AST_IEXPRESSION
 
+#include "Prison/AST/Scope.h"
+
 namespace Prison { namespace AST {
 
-class IExpression
+using namespace Prison::AST;
+
+class Scope;
+
+class Node
 {
 	public:
-		IExpression() {};
-		IExpression(IExpression * l, IExpression * r) {
+		Node() {};
+		Node(Node * l, Node * r) {
 			m_type = "expression";
 			m_left = l;
 			m_right = r;
 		};
 
-		virtual ~IExpression();
+		virtual ~Node() {}
 
-		virtual IExpression & evaluate() {
+		virtual Node & evaluate() {
 			if (m_left) {
 				m_left->evaluate();
 			}
@@ -27,7 +33,7 @@ class IExpression
 			return *this;
 		}
 
-		virtual IExpression & evaluate(Scope * scope) {
+		virtual Node & evaluate(Scope * scope) {
 			if (m_left) {
 				m_left->evaluate(scope);
 			}
@@ -39,28 +45,23 @@ class IExpression
 			return *this;
 		}
 
-		virtual IExpression & operator+(IExpression & expr) {
+		virtual Node & operator+(Node & expr) {
 			return *this;
 		};
-		virtual IExpression & operator-(IExpression & expr) {
+		virtual Node & operator-(Node & expr) {
 			return *this;
 		};
-		virtual IExpression & operator-() {
+		virtual Node & operator-() {
 			return *this;
 		};
-		virtual IExpression & operator=(IExpression & expr) {
+		virtual Node & operator=(Node & expr) {
 			return *this;
 		};
 
-
-		int getSize() {
-			return m_size;
-		}
 	protected:
 		const char * m_type;
-		int m_size;
-		IExpression * m_left;
-		IExpression * m_right;
+		Node * m_left;
+		Node * m_right;
 };
 
 }} // namespace Prison:AST
