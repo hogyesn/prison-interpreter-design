@@ -60,7 +60,7 @@ class HashMap
 
 			int i = 0;
 			while (key[i] != '\0') {
-				sum += i * key[i];
+				sum += (i + 1) * key[i];
 
 				i++;
 			}
