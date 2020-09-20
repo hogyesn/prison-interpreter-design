@@ -2,6 +2,7 @@
 #define PRISON_AST_IEXPRESSION
 
 #include "Prison/AST/Scope.h"
+// #include "Prison/AST/Types/Bool.h"
 
 namespace Prison { namespace AST {
 
@@ -14,7 +15,7 @@ class Node
 	public:
 		Node() {};
 		Node(Node * l, Node * r) {
-			m_type = "expression";
+			m_type = "node";
 			m_left = l;
 			m_right = r;
 		};
@@ -45,19 +46,39 @@ class Node
 			return *this;
 		}
 
-		virtual Node & operator+(Node & expr) {
+		virtual Node & operator+(Node & node) {
 			return *this;
 		};
-		virtual Node & operator-(Node & expr) {
+		virtual Node & operator-(Node & node) {
 			return *this;
 		};
 		virtual Node & operator-() {
 			return *this;
 		};
-		virtual Node & operator=(Node & expr) {
+		virtual Node & operator=(Node & node) {
 			return *this;
 		};
-
+		virtual bool operator==(Node & node) {
+			return *this == node;
+		};
+		virtual bool operator!=(Node & node) {
+			return *this != node;
+		};
+		virtual bool operator<(Node & node) {
+			return *this < node;
+		};
+		virtual bool operator<=(Node & node) {
+			return *this <= node;
+		};
+		virtual bool operator>(Node & node) {
+			return *this > node;
+		};
+		virtual bool operator>=(Node & node) {
+			return *this >= node;
+		};
+		virtual bool operator!() {
+			return !*this;
+		};
 	protected:
 		const char * m_type;
 		Node * m_left;

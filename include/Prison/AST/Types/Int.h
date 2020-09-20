@@ -50,10 +50,39 @@ class Int : public virtual Node {
 			Int * newInt = new Int(-m_number);
 
 			return * newInt;
-		};
+		}
 
-		bool operator<(Int & i) {
-			return m_number < i.getValue();
+		virtual bool operator==(Node & node) {
+			const Int * otherInt = dynamic_cast<const Int *>(&node.evaluate());
+
+			return m_number == otherInt->m_number;
+		}
+		virtual bool operator!=(Node & node) {
+			const Int * otherInt = dynamic_cast<const Int *>(&node.evaluate());
+
+			return m_number == otherInt->m_number;
+		}
+
+		virtual bool operator<(Node & node) {
+			const Int * otherInt = dynamic_cast<const Int *>(&node.evaluate());
+
+			return m_number < otherInt->m_number;
+		}
+		virtual bool operator<=(Node & node) {
+			const Int * otherInt = dynamic_cast<const Int *>(&node.evaluate());
+
+			return m_number <= otherInt->m_number;
+		}
+
+		virtual bool operator>(Node & node) {
+			const Int * otherInt = dynamic_cast<const Int *>(&node.evaluate());
+
+			return m_number > otherInt->m_number;
+		}
+		virtual bool operator>=(Node & node) {
+			const Int * otherInt = dynamic_cast<const Int *>(&node.evaluate());
+
+			return m_number >= otherInt->m_number;
 		}
 
 
