@@ -15,5 +15,5 @@ set(CMAKE_BUILD_TYPE Debug)
 include_directories( ./include ./src )
 
 # target
-file(GLOB SRC "src/*cpp")
+file(GLOB_RECURSE SRC "src/*cpp")
 add_executable( prison ${SRC} )

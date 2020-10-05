@@ -39,6 +39,7 @@ char Scanner::shift() {
 		if (m_next == '\n') {
 			m_next_line++;
 			m_next_column = 1;
+			break;
 		}
 
 		// expressive character found

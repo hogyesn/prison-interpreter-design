@@ -1,4 +1,5 @@
 #include "Prison/Parser/Lexer.h"
+#include "Prison/Parser/Scanner.h"
 #include <ctype.h>
 #include <regex>
 #include <map>
@@ -9,11 +10,21 @@ using namespace Prison::Parser;
 Lexer::Lexer(Scanner * scanner) {
 	m_scanner = scanner;
 
+	m_tokenRegexes["nl"] = "\r?\n";
+	m_tokenRegexes["utf8bom"] = "\xef?\xbb?\xbf?";
+
+	m_tokenRegexes["if"] = "if";
+
 	m_tokenRegexes["id"] = "[a-zA-Z][a-zA-Z_0-9]*";
 	m_tokenRegexes["int"] = "[0-9]+";
+	m_tokenRegexes["float"] = "([0-9]+([.][0-9]*)?|[.][0-9]+)";
 	m_tokenRegexes["plus"] = "\\+";
 	m_tokenRegexes["semicolon"] = "\\;";
-	m_tokenRegexes["equals"] = "=";
+	m_tokenRegexes["par_l"] = "\\(";
+	m_tokenRegexes["par_r"] = "\\)";
+	m_tokenRegexes["assign"] = "=";
+	m_tokenRegexes["equals"] = "==";
+	m_tokenRegexes["not_equals"] = "!=";
 
 	m_next = new char[0];
 	shift();
