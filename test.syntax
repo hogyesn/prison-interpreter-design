@@ -1,4 +1,10 @@
-﻿aVeryLongVariableName = 0;
-a = 1;
-two = 2;&
-three = one + two;
+﻿int aVeryLongVariableName = 0;
+
+int a = 1;
+float two = 2.0;
+
+int three = one + two;
+
+if (three != 4) {
+	a = 2;
+}

@@ -2,6 +2,7 @@
 #define PRISON_PARSER_LEXER
 
 #include "Scanner.h"
+#include "Grammar.h"
 #include <map>
 #include <iostream>
 
@@ -16,7 +17,7 @@ struct Token {
 
 class Lexer {
 	public:
-		Lexer(Scanner * scanner);
+		Lexer(Scanner * scanner, Grammar * grammar);
 		~Lexer();
 
 		Scanner * getScanner();
@@ -26,6 +27,7 @@ class Lexer {
 		bool eof();
 	private:
 		Scanner * m_scanner;
+		Grammar * m_grammar;
 		char * m_next;
 		std::map<const char *, const char *> m_tokenRegexes;
 
